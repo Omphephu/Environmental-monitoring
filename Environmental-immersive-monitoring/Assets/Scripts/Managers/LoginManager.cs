@@ -112,6 +112,10 @@ public class LoginManager : MonoBehaviour
         try {
             await AuthenticationService.Instance.SignUpWithUsernamePasswordAsync(username, password);
             Debug.Log("Signup is successful");
+            // store user data
+            SessionManager.Instance.SetUser(username);
+            // Load dashboard scene
+            await LoadDashboardSceneAsync("Dashboard_Scene");
         }
         catch (AuthenticationException ex){
             // Compare error code to AuthenticationErrorCodes
